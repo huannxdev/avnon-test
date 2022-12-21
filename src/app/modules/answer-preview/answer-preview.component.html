@@ -1,0 +1,21 @@
+<div class="questions" *ngIf="(questionList$ | async) as questionList">
+  <div class="questions__content">
+    <ng-container *ngFor="let question of questionList">
+      <div class="questions__item">
+        <h3 class="question__title">{{question.title | titlecase}}</h3>
+        <div class="question__answer">
+          <ng-container *ngIf="question.answerType === AnswerType.Paragraph; else checkboxRef">
+            <p>{{question.textAnswers}}</p>
+          </ng-container>
+        </div>
+      </div>
+
+      <ng-template #checkboxRef>
+        <p
+          *ngFor="let option of question.answerOptions | tuiMapper : filterAnswerCheckBox">{{(option.isOther && option.optionalValue ? option.label + '-' + option.optionalValue : option.label) | titlecase}}</p>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <a [routerLink]="'../builder'">Back to Form Builder</a>
+</div>

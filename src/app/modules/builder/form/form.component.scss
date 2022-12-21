@@ -1,0 +1,14 @@
+.container {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.form-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.builder-action {
+  cursor: pointer;
+  text-decoration: underline;
+}

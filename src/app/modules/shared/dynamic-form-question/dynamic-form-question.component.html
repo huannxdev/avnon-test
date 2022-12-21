@@ -1,0 +1,35 @@
+<div [ngSwitch]="question.answerType">
+  <p class="question-title">{{question.title}} <span *ngIf="question.isRequired">*</span></p>
+
+  <div [formGroup]="form" *ngSwitchCase="AnswerType.Paragraph">
+    <p>
+      <tui-text-area class="tui-space_bottom-4 tui-space_top-1"
+                     [formControlName]="question.key"
+                     [tuiTextfieldLabelOutside]="true"></tui-text-area>
+    </p>
+  </div>
+  <ng-container *ngSwitchCase="AnswerType.Checkbox">
+    <ng-container *ngFor="let checkbox of answers">
+      <ng-container *ngIf="!checkbox.isOther; else other">
+        <tui-checkbox-labeled
+          [(ngModel)]="checkbox.checked"
+          (ngModelChange)="onCheckboxChange()"
+          size="l"
+          class="tui-space_bottom-3"
+        >{{checkbox.label}}</tui-checkbox-labeled>
+      </ng-container>
+
+      <ng-template #other>
+        <tui-checkbox-labeled
+          [(ngModel)]="checkbox.checked"
+          (ngModelChange)="onCheckboxChange(checkbox)"
+          size="l"
+          class="tui-space_bottom-3">
+          {{checkbox.label}}
+          <input *ngIf="checkbox.checked" [formControl]="otherFormControl"/>
+        </tui-checkbox-labeled>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <tui-error [error]="computedError"></tui-error>
+</div>

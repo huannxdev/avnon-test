@@ -1,0 +1,33 @@
+.new-question-form {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 0 16px;
+}
+
+.form {
+  padding: 8px 8px 0 8px;
+  display: flex;
+  flex-direction: column;
+
+  &__more-option {
+    cursor: pointer;
+    color: #457df5;
+    margin-bottom: 16px;
+  }
+
+  &__list-option {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.primary-color {
+  color: #457df5;
+}

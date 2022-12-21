@@ -1,0 +1,13 @@
+.questions {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  &__content {
+    margin-bottom: 24px;
+  }
+
+  &__item {
+    margin-top: 16px;
+  }
+}

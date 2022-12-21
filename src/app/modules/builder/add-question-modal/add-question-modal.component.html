@@ -1,0 +1,89 @@
+<div [formGroup]="formQuestion" class="new-question-form">
+  <h3>Add a New Questions</h3>
+  <div class="form b-form">
+    <tui-select
+      class="b-form"
+      [tuiTextfieldLabelOutside]="true"
+      [valueContent]="stringify(answerTypeOptions)"
+      formControlName="answerType"
+    >
+      Answer type
+      <ng-template tuiDataList>
+        <tui-data-list>
+          <button
+            *ngFor="let option of answerTypeOptions"
+            tuiOption
+            [value]="option.value"
+          >
+            {{ option.label }}
+          </button>
+        </tui-data-list>
+      </ng-template>
+    </tui-select>
+    <tui-error
+      formControlName="answerType"
+      [error]="[] | tuiFieldError | async"
+    ></tui-error>
+
+    <p>
+      <tui-input
+        tuiTextfieldSize="s"
+        formControlName="title"
+      >
+        Type question here
+        <input
+          tuiTextfield
+        />
+      </tui-input>
+      <tui-error
+        formControlName="title"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </p>
+    <div *ngIf="answerOptionsControl" class="form__list-option" formArrayName="answerOptions">
+      <p *ngFor="let _ of answerOptionsControl.controls; index as i">
+        <tui-input
+          tuiTextfieldSize="s"
+          [formControl]="answerOptionsControl.controls[i]"
+        >
+          Add Answer Option
+          <input
+            tuiTextfield
+            placeholder="Add Answer Option"
+          />
+        </tui-input>
+        <tui-error
+          [formControl]="answerOptionsControl.controls[i]"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+      </p>
+
+    </div>
+
+    <ng-container *ngIf="answerTypeControl.value === AnswerType.Checkbox">
+      <a (click)="addMoreAnswerOption()" class="form__more-option">+Add another answer</a>
+      <tui-checkbox-labeled
+        formControlName="allowAddMoreAnswer"
+        size="l"
+        class="tui-space_bottom-3"
+      ><span class="primary-color">Allow user to specify their own answer</span></tui-checkbox-labeled>
+    </ng-container>
+    <tui-checkbox-labeled
+      formControlName="isRequired"
+      size="l"
+      class="tui-space_bottom-3"
+    ><span class="primary-color">This field is required</span></tui-checkbox-labeled>
+  </div>
+
+  <div class="action">
+    <button
+      (click)="onSubmit()"
+      tuiButton
+      type="button"
+      appearance="primary"
+      class="tui-space_right-3 tui-space_bottom-3"
+    >
+      Submit
+    </button>
+  </div>
+</div>

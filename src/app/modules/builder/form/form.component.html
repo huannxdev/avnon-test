@@ -1,0 +1,20 @@
+<div class="container">
+<form [formGroup]="form">
+  <ng-container *ngFor="let question of questions">
+    <app-dynamic-form-question [form]="form" [question]="question"></app-dynamic-form-question>
+  </ng-container>
+</form>
+<a (click)="openNewQuestionModal()" class="mat-tab-link builder-action">Add New Question</a>
+<div class="form-action">
+  <button
+    (click)="review()"
+    tuiButton
+    type="button"
+    size="s"
+    appearance="primary"
+    class="tui-space_right-2 tui-space_bottom-2 submit-btn"
+  >
+    Review my answers >
+  </button>
+</div>
+</div>
